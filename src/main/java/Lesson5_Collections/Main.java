@@ -20,15 +20,15 @@ public class Main {
         for (int i = 100; i > 0; i--) {
             arrayList.add(i);
         }
-        int positionInLinkedList = (int)findList(linkedList, 10);
-        int positionInArrayList = (int)findList(arrayList, 12);
+        int positionInLinkedList = (int)findItemInList(linkedList, 10);
+        int positionInArrayList = (int)findItemInList(arrayList, 12);
         System.out.println("Positon in linkedList: " + positionInLinkedList);
         System.out.println("Positon in arrayList: " + positionInArrayList);
         linkedList.remove(positionInLinkedList);
         arrayList.remove(positionInArrayList);
 
-        System.out.println(findList(linkedList, 10));
-        System.out.println(findList(arrayList, 12));
+        System.out.println(findItemInList(linkedList, 10));
+        System.out.println(findItemInList(arrayList, 12));
 
         MyArrayList<String> myList = new MyArrayList<>();
         myList.add("B");
@@ -51,7 +51,7 @@ public class Main {
 
     }
 
-    public static Object findList(List list, Object element) {
+    public static Object findItemInList(List list, Object element) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals(element)) {
                 return i;

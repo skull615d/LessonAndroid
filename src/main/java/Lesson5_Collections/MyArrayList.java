@@ -8,7 +8,7 @@ public class MyArrayList<E> implements List<E> {
     private int size;
     Object[] array;
 
-    public MyArrayList(){
+    public MyArrayList() {
         array = new Object[DEFAULT_SIZE];
     }
 
@@ -19,17 +19,17 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public boolean isEmpty() {
-        return size==0;
+        return size == 0;
     }
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Iterator iterator() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public boolean remove(Object o) {
         for (int i = 0; i < array.length; i++) {
-            if(o.equals(array[i])){
+            if (o.equals(array[i])) {
                 remove(i);
                 return true;
             }
@@ -58,20 +58,25 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public boolean addAll(Collection c) {
-        for (int i = 0; i < c.size(); i++) {
-
+        try {
+            E[] newCollection = (E[]) c.toArray();
+            for (E e : newCollection) {
+                add(e);
+            }
+        } catch (ClassCastException e) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
     public boolean addAll(int index, Collection c) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean retainAll(Collection c) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -81,17 +86,17 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public E get(int index) {
-        return (E)array[index];
+        return (E) array[index];
     }
 
     @Override
     public Object set(int index, Object element) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void add(int index, Object element) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -99,13 +104,13 @@ public class MyArrayList<E> implements List<E> {
         Object a = array[index];
         array[index] = null;
         cleanNull();
-        return (E)a;
+        return (E) a;
     }
 
     @Override
     public int indexOf(Object o) {
         for (int i = 0; i < array.length; i++) {
-            if(o.equals(array[i])){
+            if (o.equals(array[i])) {
                 return i;
             }
         }
@@ -114,22 +119,22 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public ListIterator listIterator() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public ListIterator listIterator(int index) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List subList(int fromIndex, int toIndex) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -137,7 +142,7 @@ public class MyArrayList<E> implements List<E> {
         Object[] arr = c.toArray();
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < array.length; j++) {
-                if(arr[i]==array[j]){
+                if (arr[i] == array[j]) {
                     remove(j);
                 }
             }
@@ -147,36 +152,38 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public boolean containsAll(Collection c) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Object[] toArray(Object[] a) {
-        return new Object[0];
+        return array;
     }
 
-    private void grow(int oldSize){
-        if(oldSize == array.length){
-            size = oldSize + oldSize/2;
-            array = Arrays.copyOf(array,size);
+    private void grow(int oldSize) {
+        if (oldSize >= array.length) {
+            size = oldSize + oldSize / 2;
+            array = Arrays.copyOf(array, size);
         }
     }
-    private void cleanNull(){
+
+    private void cleanNull() {
         Object[] newArr = new Object[countElement];
         int count = 0;
         for (int i = 0; i < array.length; i++) {
-            if(array[i]!=null){
+            if (array[i] != null) {
                 newArr[count] = array[i];
                 count++;
             }
         }
         array = newArr;
     }
-    public String toString(){
+
+    public String toString() {
         StringBuilder sb;
         sb = new StringBuilder();
         for (int i = 0; i < array.length; i++) {
-            if(array[i]!=null){
+            if (array[i] != null) {
                 sb.append(array[i]);
                 sb.append(" ");
             }
