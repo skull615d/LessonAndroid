@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Parser {
-    public ArrayList<String> parse(File file) throws IOException {
+    public ArrayList<String> parseBufferedReader(File file) throws IOException {
         BufferedReader reader = null;
         ArrayList<String> list = new ArrayList<>();
         try {
