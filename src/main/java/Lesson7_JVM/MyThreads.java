@@ -39,8 +39,8 @@ public class MyThreads {
 
     public static void main(String[] arg) {
 
-        Thread thread = new Thread(() -> getValue(5));
-        Thread thread2 = new Thread(() -> getValue(7));
+        Thread threadTimer5 = new Thread(() -> getValue(5));
+        Thread thread2Timer7 = new Thread(() -> getValue(7));
 
         Thread thread1 = new Thread(() -> {
             while (count < COUNT_MAX) {
@@ -53,8 +53,8 @@ public class MyThreads {
                 }
             }
         });
-        thread.start();
+        threadTimer5.start();
         thread1.start();
-        thread2.start();
+        thread2Timer7.start();
     }
 }

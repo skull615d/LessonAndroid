@@ -8,6 +8,10 @@ import java.io.FileReader;
 import java.util.List;
 
 public class Producer implements Runnable {
+    MyQueue myQueue;
+    public Producer(MyQueue myQueue){
+        this.myQueue = myQueue;
+    }
     @Override
     public void run() {
         System.out.println("Start Producer");
@@ -17,7 +21,7 @@ public class Producer implements Runnable {
             FileReader fr = new FileReader(file);
             List<String> list = Find.countRegexInTextFile(regex, fr);
             System.out.println("Find " + list.size() + " elements");
-            MyQueue.add(list);
+            myQueue.add(list);
         } catch (FileNotFoundException | InterruptedException e) {
             e.printStackTrace();
         }

@@ -6,8 +6,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class Main {
     public static void main(String[] arg) {
-        Thread thread = new Thread(new Consumer());
-        Thread thread1 = new Thread(new Producer());
+        MyQueue myQueue = new MyQueue();
+        Thread thread = new Thread(new Consumer(myQueue));
+        Thread thread1 = new Thread(new Producer(myQueue));
         thread.start();
         thread1.start();
     }
