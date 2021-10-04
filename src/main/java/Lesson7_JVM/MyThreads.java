@@ -39,33 +39,20 @@ public class MyThreads {
 
     public static void main(String[] arg) {
 
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                getValue(5);
-            }
-        };
-        Thread thread2 = new Thread() {
-            @Override
-            public void run() {
-                getValue(7);
-            }
-        };
+        Thread thread = new Thread(() -> getValue(5));
+        Thread thread2 = new Thread(() -> getValue(7));
 
-        Thread thread1 = new Thread() {
-            @Override
-            public void run() {
-                while (count < COUNT_MAX) {
-                    setValue();
-                    System.out.println(count);
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        Thread thread1 = new Thread(() -> {
+            while (count < COUNT_MAX) {
+                setValue();
+                System.out.println(count);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-        };
+        });
         thread.start();
         thread1.start();
         thread2.start();

@@ -2,6 +2,8 @@ package Lesson7_JVM.Task3;
 
 import Lesson6_Сollections_framework.Lesson6;
 
+import java.util.concurrent.LinkedBlockingQueue;
+
 public class Main {
     public static void main(String[] arg) {
         Thread thread = new Thread(new Consumer());

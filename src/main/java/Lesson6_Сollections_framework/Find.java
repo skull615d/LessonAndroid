@@ -25,16 +25,17 @@ public class Find {
         System.out.println(count);
     }
 
-    public static void countRegexInTextFile(String regex, FileReader fileReader) {
-        int count = 0;
+    public static List<String> countRegexInTextFile(String regex, FileReader fileReader) {
+        //int count = 0;
         Pattern pattern = regexToPattern(regex);
         Scanner scanner = new Scanner(fileReader);
         List<String> list = scanner.findAll(pattern).
                 map(MatchResult::group).
                 collect(Collectors.toList());
-        count = list.size();
-        System.out.println(list.size());
-        list.forEach(System.out::println);
+        //System.out.println(list.size());
+        //list.forEach(System.out::println);
+        scanner.close();
+        return list;
     }
 
     private static Pattern regexToPattern(String regex) {
